@@ -11,89 +11,74 @@
     --header: #1a6b4a;
     --bubble-bot: #ffffff;
     --bubble-user: #dcf8c6;
-    --text: #111;
-    --muted: #667781;
-    --border: #d1d7db;
     --accent: #1a6b4a;
     --warn: #c84b1a;
     --warn-light: #fdf0eb;
-    --card: #fff;
+    --muted: #667781;
+    --border: #d1d7db;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); font-family: 'Heebo', sans-serif; height: 100dvh; display: flex; flex-direction: column; direction: rtl; overflow: hidden; }
 
-  /* Header */
   .chat-header {
     background: var(--header); color: white;
     padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.75rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0;
   }
-  .avatar {
-    width: 42px; height: 42px; border-radius: 50%;
-    background: #6ee7b7; display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; flex-shrink: 0;
-  }
-  .chat-header .info .name { font-weight: 600; font-size: 1rem; }
-  .chat-header .info .status { font-size: 0.75rem; opacity: 0.85; }
+  .avatar { width: 42px; height: 42px; border-radius: 50%; background: #6ee7b7; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .chat-header .name { font-weight: 600; font-size: 1rem; }
+  .chat-header .status { font-size: 0.75rem; opacity: 0.85; }
 
-  /* Messages area */
-  .messages {
-    flex: 1; overflow-y: auto; padding: 1rem;
-    display: flex; flex-direction: column; gap: 0.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b99a' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
+  .messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b99a' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
 
-  /* Bubbles */
-  .msg { display: flex; flex-direction: column; max-width: 80%; }
+  .msg { display: flex; flex-direction: column; max-width: 82%; }
   .msg.bot { align-self: flex-start; }
   .msg.user { align-self: flex-end; }
-
-  .bubble {
-    padding: 0.6rem 0.85rem; border-radius: 8px;
-    font-size: 0.9rem; line-height: 1.5; position: relative;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
+  .bubble { padding: 0.6rem 0.9rem; border-radius: 10px; font-size: 0.88rem; line-height: 1.6; position: relative; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
   .msg.bot .bubble { background: var(--bubble-bot); border-top-right-radius: 2px; }
   .msg.user .bubble { background: var(--bubble-user); border-top-left-radius: 2px; }
-  .bubble .time { font-size: 0.65rem; color: var(--muted); text-align: left; margin-top: 0.25rem; }
+  .time { font-size: 0.62rem; color: var(--muted); text-align: left; margin-top: 0.3rem; }
 
-  /* Cards inside bot bubble */
-  .stats-row {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 0.6rem;
+  /* Action buttons */
+  .actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+  .action-btn {
+    background: white; border: 1.5px solid var(--accent); color: var(--accent);
+    border-radius: 20px; padding: 0.35rem 0.85rem; font-size: 0.8rem;
+    cursor: pointer; font-family: 'Heebo', sans-serif; transition: all 0.15s;
+    font-weight: 500;
   }
-  .stat-mini {
-    background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
-    padding: 0.5rem 0.75rem; text-align: center;
-  }
-  .stat-mini .v { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
-  .stat-mini .l { font-size: 0.68rem; color: var(--muted); }
+  .action-btn:hover { background: var(--accent); color: white; }
+  .action-btn.used { opacity: 0.4; pointer-events: none; }
 
-  .cluster-row { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #eee; font-size: 0.82rem; }
-  .cluster-row:last-child { border: none; }
-  .cluster-price { color: var(--accent); font-weight: 600; font-size: 0.78rem; }
-
-  .anomaly-card { background: var(--warn-light); border-right: 3px solid var(--warn); border-radius: 6px; padding: 0.5rem 0.7rem; margin-top: 0.4rem; font-size: 0.8rem; }
-  .anomaly-card .ah { font-weight: 600; color: var(--warn); }
-  .dev-badge { background: var(--warn); color: white; font-size: 0.65rem; padding: 0.1rem 0.35rem; border-radius: 4px; margin-right: 0.3rem; }
-
-  .bar-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; font-size: 0.75rem; }
-  .bar-label { width: 70px; text-align: left; color: var(--muted); font-size: 0.7rem; flex-shrink: 0; }
-  .bar-bg { flex: 1; background: #e9ecef; border-radius: 4px; height: 18px; overflow: hidden; }
-  .bar-fill { height: 100%; background: var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-left: 5px; transition: width 0.6s; }
-  .bar-fill span { font-size: 0.62rem; color: white; white-space: nowrap; }
-
-  .prop-card {
-    background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px;
-    padding: 0.6rem 0.8rem; margin-top: 0.4rem; font-size: 0.82rem;
-  }
-  .prop-card .ph { font-weight: 600; font-size: 0.88rem; color: var(--accent); }
-  .prop-card .pm { color: var(--muted); font-size: 0.75rem; margin-top: 0.15rem; }
-  .badge { display: inline-block; font-size: 0.65rem; padding: 0.1rem 0.35rem; border-radius: 4px; margin-right: 0.2rem; }
+  /* Data cards */
+  .prop-card { background: #f8fffe; border: 1px solid #b7e4cc; border-radius: 10px; padding: 0.65rem 0.9rem; margin-bottom: 0.4rem; }
+  .prop-city { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+  .prop-price { font-size: 1rem; font-weight: 700; color: #111; margin: 0.15rem 0; }
+  .prop-details { color: var(--muted); font-size: 0.75rem; }
+  .badge { display: inline-block; font-size: 0.65rem; padding: 0.1rem 0.4rem; border-radius: 4px; margin-right: 0.2rem; margin-top: 0.25rem; }
   .b-green { background: #dcf8c6; color: #1a6b4a; }
   .b-red { background: var(--warn-light); color: var(--warn); }
 
-  /* Typing indicator */
-  .typing { display: flex; align-items: center; gap: 4px; padding: 0.6rem 0.85rem; background: white; border-radius: 8px; width: fit-content; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+  .cluster-row { display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0; border-bottom: 1px solid #eee; font-size: 0.83rem; }
+  .cluster-row:last-child { border: none; }
+  .cluster-name { font-weight: 500; }
+  .cluster-meta { color: var(--muted); font-size: 0.72rem; }
+  .cluster-price { color: var(--accent); font-weight: 600; font-size: 0.82rem; }
+
+  .anomaly-card { background: var(--warn-light); border-right: 3px solid var(--warn); border-radius: 8px; padding: 0.55rem 0.8rem; margin-bottom: 0.4rem; font-size: 0.82rem; }
+  .anomaly-city { font-weight: 600; color: var(--warn); }
+  .dev-badge { background: var(--warn); color: white; font-size: 0.65rem; padding: 0.1rem 0.35rem; border-radius: 4px; margin-right: 0.3rem; }
+
+  .bar-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; font-size: 0.78rem; }
+  .bar-label { width: 65px; text-align: left; color: var(--muted); font-size: 0.72rem; flex-shrink: 0; }
+  .bar-bg { flex: 1; background: #e9ecef; border-radius: 4px; height: 20px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-left: 5px; transition: width 0.6s; }
+  .bar-fill span { font-size: 0.65rem; color: white; white-space: nowrap; }
+
+  .section-lbl { font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+
+  /* Typing */
+  .typing { display: flex; align-items: center; gap: 4px; padding: 0.6rem 0.85rem; background: white; border-radius: 10px; width: fit-content; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
   .typing span { width: 7px; height: 7px; background: #aaa; border-radius: 50%; animation: bounce 1.2s infinite; }
   .typing span:nth-child(2) { animation-delay: 0.2s; }
   .typing span:nth-child(3) { animation-delay: 0.4s; }
@@ -101,49 +86,25 @@
 
   /* Quick chips */
   .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
-  .chip {
-    background: white; border: 1px solid var(--accent); color: var(--accent);
-    border-radius: 20px; padding: 0.3rem 0.75rem; font-size: 0.78rem;
-    cursor: pointer; font-family: 'Heebo', sans-serif; transition: background 0.15s;
-  }
+  .chip { background: white; border: 1px solid var(--accent); color: var(--accent); border-radius: 20px; padding: 0.3rem 0.75rem; font-size: 0.78rem; cursor: pointer; font-family: 'Heebo', sans-serif; transition: all 0.15s; }
   .chip:hover { background: var(--accent); color: white; }
 
-  /* Input area */
-  .input-area {
-    background: #f0f2f5; padding: 0.6rem 0.75rem;
-    display: flex; align-items: flex-end; gap: 0.5rem; flex-shrink: 0;
-    border-top: 1px solid var(--border);
-  }
-  .input-wrap {
-    flex: 1; background: white; border-radius: 24px;
-    display: flex; align-items: flex-end; padding: 0.4rem 0.9rem;
-    border: 1px solid var(--border);
-  }
-  textarea#chatInput {
-    flex: 1; border: none; outline: none; resize: none;
-    font-family: 'Heebo', sans-serif; font-size: 0.92rem;
-    max-height: 120px; direction: rtl; background: transparent;
-    line-height: 1.5; padding: 0.1rem 0;
-  }
-  .send-btn {
-    width: 44px; height: 44px; border-radius: 50%; border: none;
-    background: var(--accent); color: white; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; flex-shrink: 0; transition: background 0.2s;
-  }
+  /* Input */
+  .input-area { background: #f0f2f5; padding: 0.6rem 0.75rem; display: flex; align-items: flex-end; gap: 0.5rem; flex-shrink: 0; border-top: 1px solid var(--border); }
+  .input-wrap { flex: 1; background: white; border-radius: 24px; display: flex; align-items: flex-end; padding: 0.4rem 0.9rem; border: 1px solid var(--border); }
+  textarea#chatInput { flex: 1; border: none; outline: none; resize: none; font-family: 'Heebo', sans-serif; font-size: 0.92rem; max-height: 120px; direction: rtl; background: transparent; line-height: 1.5; padding: 0.1rem 0; }
+  .send-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; transition: background 0.2s; }
   .send-btn:hover { background: #145a3c; }
   .send-btn:disabled { background: #aaa; cursor: not-allowed; }
-
-  .section-title { font-size: 0.72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0.5rem 0 0.3rem; }
 </style>
 </head>
 <body>
 
 <div class="chat-header">
   <div class="avatar">🏠</div>
-  <div class="info">
+  <div>
     <div class="name">נדל"ן IQ</div>
-    <div class="status" id="statusText">מחבר לנתוני יד2...</div>
+    <div class="status" id="statusText">מתחבר...</div>
   </div>
 </div>
 
@@ -151,7 +112,7 @@
 
 <div class="input-area">
   <div class="input-wrap">
-    <textarea id="chatInput" rows="1" placeholder="שאל אותי על נדל"ן..."></textarea>
+    <textarea id="chatInput" rows="1" placeholder='שאל אותי על נדל"ן...'></textarea>
   </div>
   <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
 </div>
@@ -159,12 +120,13 @@
 <script>
 const fmt = n => '₪' + Number(n).toLocaleString('he-IL');
 const now = () => new Date().toLocaleTimeString('he-IL', {hour:'2-digit', minute:'2-digit'});
-let statsData = null;
+let lastData = null;
 
-function addMsg(content, type='bot') {
+function addMsg(content, type='bot', id=null) {
   const ms = document.getElementById('messages');
   const div = document.createElement('div');
   div.className = `msg ${type}`;
+  if (id) div.id = id;
   div.innerHTML = `<div class="bubble">${content}<div class="time">${now()}</div></div>`;
   ms.appendChild(div);
   ms.scrollTop = ms.scrollHeight;
@@ -176,12 +138,69 @@ function showTyping() {
   const div = document.createElement('div');
   div.className = 'msg bot'; div.id = 'typing';
   div.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
-  ms.appendChild(div);
-  ms.scrollTop = ms.scrollHeight;
+  ms.appendChild(div); ms.scrollTop = ms.scrollHeight;
 }
-function hideTyping() {
-  const t = document.getElementById('typing');
-  if (t) t.remove();
+function hideTyping() { document.getElementById('typing')?.remove(); }
+
+function markUsed(btnId) {
+  document.querySelectorAll(`[data-group="${btnId}"]`).forEach(b => b.classList.add('used'));
+}
+
+function showProperties() {
+  markUsed('data-actions');
+  if (!lastData?.properties?.length) { addMsg('לא נמצאו נכסים תואמים.'); return; }
+  let html = `<div class="section-lbl">נכסים תואמים (${lastData.properties.length})</div>`;
+  lastData.properties.slice(0,5).forEach(p => {
+    html += `<div class="prop-card">
+      <div class="prop-city">${p.city}${p.neighborhood ? ' · ' + p.neighborhood : ''}</div>
+      <div class="prop-price">${fmt(p.price)}</div>
+      <div class="prop-details">${p.property_type} · ${p.rooms} חד' · ${Number(p.area_sqm).toLocaleString()} מ"ר · ${Number(p.price_per_sqrm||0).toLocaleString()} ₪/מ"ר</div>
+      <div><span class="badge b-green">${p.cluster_label}</span>${p.is_anomaly ? '<span class="badge b-red">⚠ חריג</span>' : ''}</div>
+    </div>`;
+  });
+  addMsg(html);
+}
+
+function showClusters() {
+  markUsed('data-actions');
+  if (!lastData?.clusters?.length) return;
+  let html = `<div class="section-lbl">סגמנטים בשוק — K-Means Clustering</div>`;
+  lastData.clusters.forEach(c => {
+    html += `<div class="cluster-row">
+      <div><div class="cluster-name">${c.cluster_label}</div><div class="cluster-meta">${Number(c.count).toLocaleString()} נכסים · ${c.avg_rooms} חד' · ${Number(c.avg_sqm).toLocaleString()} מ"ר</div></div>
+      <div class="cluster-price">${fmt(c.avg_price)}</div>
+    </div>`;
+  });
+  addMsg(html);
+}
+
+function showAnomalies() {
+  markUsed('data-actions');
+  if (!lastData?.anomalies?.length) return;
+  let html = `<div class="section-lbl">חריגות מחיר — Isolation Forest</div>`;
+  lastData.anomalies.slice(0,4).forEach(a => {
+    html += `<div class="anomaly-card">
+      <div class="anomaly-city">${a.city}${a.neighborhood ? ', ' + a.neighborhood : ''} <span class="dev-badge">${a.price_deviation > 0 ? '+' : ''}${a.price_deviation}σ</span></div>
+      <div>${fmt(a.price)} · ${a.rooms} חד' · ${Number(a.area_sqm).toLocaleString()} מ"ר</div>
+      <div style="color:var(--muted);font-size:0.75rem">${a.property_type}</div>
+    </div>`;
+  });
+  addMsg(html);
+}
+
+function showPrices() {
+  markUsed('data-actions');
+  const dist = lastData?.price_distribution;
+  if (!dist?.labels) return;
+  const max = Math.max(...dist.values);
+  let html = `<div class="section-lbl">התפלגות מחירים</div>`;
+  dist.labels.forEach((l, i) => {
+    html += `<div class="bar-row">
+      <div class="bar-label">${l}</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(dist.values[i]/max*100)}%"><span>${dist.values[i]}</span></div></div>
+    </div>`;
+  });
+  addMsg(html);
 }
 
 function chipSend(text) {
@@ -193,7 +212,6 @@ async function sendMessage() {
   const input = document.getElementById('chatInput');
   const query = input.value.trim();
   if (!query) return;
-
   addMsg(query, 'user');
   input.value = ''; input.style.height = 'auto';
   document.getElementById('sendBtn').disabled = true;
@@ -204,9 +222,37 @@ async function sendMessage() {
       method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ query })
     });
-    const d = await r.json();
+    lastData = await r.json();
     hideTyping();
-    renderBotResponse(d);
+
+    // Clean analysis text
+    const analysis = lastData.analysis
+      .replace(/#{1,3} (.+)/g, '<strong>$1</strong>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n{2,}/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+
+    // Show analysis + action buttons
+    const actions = `
+      <div class="actions">
+        <button class="action-btn" data-group="data-actions" onclick="showProperties()">🏠 נכסים</button>
+        <button class="action-btn" data-group="data-actions" onclick="showClusters()">📊 סגמנטים</button>
+        <button class="action-btn" data-group="data-actions" onclick="showAnomalies()">⚠️ חריגות</button>
+        <button class="action-btn" data-group="data-actions" onclick="showPrices()">💰 מחירים</button>
+      </div>`;
+
+    addMsg(analysis + actions);
+
+    // Follow-up chips
+    setTimeout(() => {
+      addMsg(`<div class="chips">
+        <button class="chip" onclick="chipSend('השווה בין תל אביב לירושלים')">ת"א vs ירושלים</button>
+        <button class="chip" onclick="chipSend('מה הכי זול?')">הכי זול</button>
+        <button class="chip" onclick="chipSend('דירת 4 חדרים בחיפה')">4 חד' חיפה</button>
+        <button class="chip" onclick="chipSend('עסקאות חריגות')">עסקאות חריגות</button>
+      </div>`);
+    }, 500);
+
   } catch(e) {
     hideTyping();
     addMsg('מצטער, אירעה שגיאה. נסה שוב.');
@@ -214,92 +260,6 @@ async function sendMessage() {
   document.getElementById('sendBtn').disabled = false;
 }
 
-function mdToHtml(text) {
-  return text
-    .replace(/### (.+)/g, '<h4 style="font-size:0.9rem;font-weight:700;margin:0.6rem 0 0.3rem;color:var(--accent)">$1</h4>')
-    .replace(/## (.+)/g, '<h3 style="font-size:1rem;font-weight:700;margin:0.6rem 0 0.3rem;color:var(--accent)">$1</h3>')
-    .replace(/# (.+)/g, '<h2 style="font-size:1.1rem;font-weight:700;margin:0.6rem 0 0.3rem">$1</h2>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^- (.+)/gm, '<li style="margin-right:1rem;margin-bottom:0.2rem">$1</li>')
-    .replace(/(<li.*<\/li>)/gs, '<ul style="margin:0.4rem 0;padding-right:0.5rem">$1</ul>')
-    .split('\n')
-    .filter(l => l.trim() && !l.startsWith('<h') && !l.startsWith('<ul') && !l.startsWith('<li'))
-    .map(l => l.startsWith('<') ? l : `<p style="margin-bottom:0.4rem">${l}</p>`)
-    .join('');
-}
-
-function renderBotResponse(d) {
-  // Analysis text
-  const paras = mdToHtml(d.analysis);
-  addMsg(paras);
-
-  // Properties (top 4)
-  if (d.properties?.length) {
-    let html = `<div class="section-title">נכסים תואמים (${d.properties.length})</div>`;
-    d.properties.slice(0,4).forEach(p => {
-      html += `<div class="prop-card">
-        <div class="ph">${p.city}${p.neighborhood ? ' · ' + p.neighborhood : ''}</div>
-        <div style="font-weight:600;color:#111;margin:0.2rem 0">${fmt(p.price)}</div>
-        <div class="pm">${p.property_type} · ${p.rooms} חד' · ${Number(p.area_sqm).toLocaleString()} מ"ר · ${Number(p.price_per_sqrm||0).toLocaleString()} ₪/מ"ר</div>
-        <div style="margin-top:0.3rem">
-          <span class="badge b-green">${p.cluster_label}</span>
-          ${p.is_anomaly ? '<span class="badge b-red">⚠ חריג</span>' : ''}
-        </div>
-      </div>`;
-    });
-    addMsg(html);
-  }
-
-  // Clusters
-  if (d.clusters?.length) {
-    let html = `<div class="section-title">סגמנטים בשוק — K-Means</div>`;
-    d.clusters.forEach(c => {
-      html += `<div class="cluster-row">
-        <div><span style="font-weight:500">${c.cluster_label}</span> <span style="color:var(--muted);font-size:0.72rem">(${Number(c.count).toLocaleString()} נכסים)</span></div>
-        <div class="cluster-price">${fmt(c.avg_price)}</div>
-      </div>`;
-    });
-    addMsg(html);
-  }
-
-  // Price distribution
-  if (d.price_distribution?.labels) {
-    const dist = d.price_distribution;
-    const max = Math.max(...dist.values);
-    let html = `<div class="section-title">התפלגות מחירים</div>`;
-    dist.labels.forEach((l, i) => {
-      html += `<div class="bar-row">
-        <div class="bar-label">${l}</div>
-        <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(dist.values[i]/max*100)}%"><span>${dist.values[i]}</span></div></div>
-      </div>`;
-    });
-    addMsg(html);
-  }
-
-  // Anomalies
-  if (d.anomalies?.length) {
-    let html = `<div class="section-title">חריגות מחיר — Isolation Forest</div>`;
-    d.anomalies.slice(0,3).forEach(a => {
-      html += `<div class="anomaly-card">
-        <div class="ah">${a.city}${a.neighborhood ? ', ' + a.neighborhood : ''}
-          <span class="dev-badge">${a.price_deviation > 0 ? '+' : ''}${a.price_deviation}σ</span>
-        </div>
-        <div>${fmt(a.price)} · ${a.rooms} חד' · ${Number(a.area_sqm).toLocaleString()} מ"ר</div>
-      </div>`;
-    });
-    addMsg(html);
-  }
-
-  // Quick chips for follow-up
-  const chips = ['דירות בתל אביב עד 4M', 'בתים פרטיים בירושלים', 'מה הכי זול?', 'חריגות מחיר'];
-  let html = `<div class="section-title">שאלות נוספות</div><div class="chips">`;
-  chips.forEach(c => { html += `<button class="chip" onclick="chipSend('${c}')">${c}</button>`; });
-  html += '</div>';
-  addMsg(html);
-}
-
-// Auto-resize textarea
 document.getElementById('chatInput').addEventListener('input', function() {
   this.style.height = 'auto';
   this.style.height = Math.min(this.scrollHeight, 120) + 'px';
@@ -308,27 +268,20 @@ document.getElementById('chatInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 });
 
-// Welcome message
 async function init() {
   try {
     const r = await fetch('/api/stats');
-    statsData = await r.json();
-    document.getElementById('statusText').textContent = 'מחובר · ' + statsData.total_listings.toLocaleString('he-IL') + ' נכסים';
+    const d = await r.json();
+    document.getElementById('statusText').textContent = 'מחובר · ' + d.total_listings.toLocaleString('he-IL') + ' נכסים';
 
     addMsg(`שלום! אני סוכן AI לניתוח שוק הנדל"ן הישראלי 🏠<br><br>
-      אני מבוסס על <strong>${statsData.total_listings.toLocaleString('he-IL')} נכסים אמיתיים מיד2</strong> ב-${statsData.city_stats.length} ערים.<br><br>
-      אני יכול לעזור לך:
-      <ul style="margin: 0.5rem 0 0.5rem 1rem; line-height: 1.8">
-        <li>למצוא נכסים לפי תקציב ועיר</li>
-        <li>לזהות עסקאות חריגות (זולות/יקרות מהממוצע)</li>
-        <li>להבין את סגמנטים בשוק</li>
-        <li>להשוות ערים</li>
-      </ul>
-      <div class="chips" style="margin-top:0.5rem">
+      מבוסס על <strong>${d.total_listings.toLocaleString('he-IL')} נכסים אמיתיים מיד2</strong>.<br>
+      שאל אותי כל שאלה — ואחרי תשובתי תוכל לבחור בדיוק מה לראות.
+      <div class="chips" style="margin-top:0.6rem">
         <button class="chip" onclick="chipSend('מה הערים הזולות ביותר?')">ערים זולות</button>
         <button class="chip" onclick="chipSend('דירת 3 חדרים עד 2.5 מיליון')">3 חד' עד 2.5M</button>
         <button class="chip" onclick="chipSend('חריגות מחיר בתל אביב')">חריגות בת"א</button>
-        <button class="chip" onclick="chipSend('השווה בין תל אביב לירושלים')">ת"א vs ירושלים</button>
+        <button class="chip" onclick="chipSend('השווה תל אביב וירושלים')">ת"א vs ירושלים</button>
       </div>`);
   } catch(e) {
     document.getElementById('statusText').textContent = 'שגיאת חיבור';
