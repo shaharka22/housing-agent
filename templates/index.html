@@ -23,8 +23,21 @@
   .chat-header {
     background: var(--header); color: white;
     padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.75rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0;
+    flex-shrink: 0;
   }
+  .quick-bar {
+    background: #145a3c; padding: 0.45rem 0.75rem;
+    display: flex; gap: 0.4rem; overflow-x: auto; flex-shrink: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .quick-bar::-webkit-scrollbar { display: none; }
+  .quick-chip {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white;
+    border-radius: 20px; padding: 0.25rem 0.75rem; font-size: 0.75rem;
+    cursor: pointer; font-family: "Heebo", sans-serif; white-space: nowrap;
+    flex-shrink: 0; transition: all 0.15s;
+  }
+  .quick-chip:hover { background: rgba(255,255,255,0.3); }
   .avatar { width: 42px; height: 42px; border-radius: 50%; background: #6ee7b7; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
   .chat-header .name { font-weight: 600; font-size: 1rem; }
   .chat-header .status { font-size: 0.75rem; opacity: 0.85; }
@@ -106,6 +119,15 @@
     <div class="name">נדל"ן IQ</div>
     <div class="status" id="statusText">מתחבר...</div>
   </div>
+</div>
+
+<div class="quick-bar">
+  <button class="quick-chip" onclick="chipSend('מה הערים הזולות ביותר?')">🏙️ ערים זולות</button>
+  <button class="quick-chip" onclick="chipSend('דירת 3 חדרים עד 2.5 מיליון')">3 חד' עד 2.5M</button>
+  <button class="quick-chip" onclick="chipSend('חריגות מחיר בתל אביב')">⚠️ חריגות בת"א</button>
+  <button class="quick-chip" onclick="chipSend('השווה תל אביב וירושלים')">ת"א vs ירושלים</button>
+  <button class="quick-chip" onclick="chipSend('דירת 4 חדרים בחיפה')">4 חד' חיפה</button>
+  <button class="quick-chip" onclick="chipSend('בתים פרטיים עד 4 מיליון')">🏡 בתים פרטיים</button>
 </div>
 
 <div class="messages" id="messages"></div>
@@ -243,15 +265,7 @@ async function sendMessage() {
 
     addMsg(analysis + actions);
 
-    // Follow-up chips
-    setTimeout(() => {
-      addMsg(`<div class="chips">
-        <button class="chip" onclick="chipSend('השווה בין תל אביב לירושלים')">ת"א vs ירושלים</button>
-        <button class="chip" onclick="chipSend('מה הכי זול?')">הכי זול</button>
-        <button class="chip" onclick="chipSend('דירת 4 חדרים בחיפה')">4 חד' חיפה</button>
-        <button class="chip" onclick="chipSend('עסקאות חריגות')">עסקאות חריגות</button>
-      </div>`);
-    }, 500);
+
 
   } catch(e) {
     hideTyping();
@@ -277,12 +291,7 @@ async function init() {
     addMsg(`שלום! אני סוכן AI לניתוח שוק הנדל"ן הישראלי 🏠<br><br>
       מבוסס על <strong>${d.total_listings.toLocaleString('he-IL')} נכסים אמיתיים מיד2</strong>.<br>
       שאל אותי כל שאלה — ואחרי תשובתי תוכל לבחור בדיוק מה לראות.
-      <div class="chips" style="margin-top:0.6rem">
-        <button class="chip" onclick="chipSend('מה הערים הזולות ביותר?')">ערים זולות</button>
-        <button class="chip" onclick="chipSend('דירת 3 חדרים עד 2.5 מיליון')">3 חד' עד 2.5M</button>
-        <button class="chip" onclick="chipSend('חריגות מחיר בתל אביב')">חריגות בת"א</button>
-        <button class="chip" onclick="chipSend('השווה תל אביב וירושלים')">ת"א vs ירושלים</button>
-      </div>`);
+`);
   } catch(e) {
     document.getElementById('statusText').textContent = 'שגיאת חיבור';
   }
