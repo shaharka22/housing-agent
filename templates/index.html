@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>HouseIQ – AI Real Estate Agent</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<title>נדל"ן IQ – סוכן AI לשוק הנדל"ן הישראלי</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
     --ink: #0f0f0f;
@@ -16,150 +16,94 @@
     --muted: #6b6b6b;
     --border: #ddd8ce;
     --card: #ffffff;
-    --mono: 'JetBrains Mono', monospace;
+    --mono: monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; min-height: 100vh; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Heebo', sans-serif; min-height: 100vh; direction: rtl; }
 
-  /* Header */
   header {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 1.5rem 2rem;
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
+    background: var(--ink); color: var(--paper);
+    padding: 1.5rem 2rem; display: flex; align-items: baseline; gap: 1rem;
   }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; letter-spacing: -0.02em; }
+  header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
   header h1 em { color: #6ee7b7; font-style: normal; }
-  header span { font-size: 0.8rem; color: #999; font-family: var(--mono); }
+  header span { font-size: 0.8rem; color: #999; }
 
-  /* Layout */
   .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
 
-  /* Query Box */
   .query-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.75rem;
-    margin-bottom: 1.5rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
-  .query-card h2 { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 1rem; }
+  .query-card h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
   textarea {
     width: 100%; border: 1px solid var(--border); border-radius: 8px;
-    padding: 0.875rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.95rem;
-    resize: vertical; min-height: 80px; background: var(--paper);
-    transition: border-color 0.2s;
+    padding: 0.875rem 1rem; font-family: 'Heebo', sans-serif; font-size: 0.95rem;
+    resize: vertical; min-height: 80px; background: var(--paper); direction: rtl;
   }
   textarea:focus { outline: none; border-color: var(--accent); }
 
-  .filters {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.75rem;
-    margin: 1rem 0;
-  }
+  .filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
   .filter-group label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; }
   .filter-group select, .filter-group input {
     width: 100%; border: 1px solid var(--border); border-radius: 6px;
     padding: 0.6rem 0.75rem; font-size: 0.875rem; background: var(--paper);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Heebo', sans-serif; direction: rtl;
   }
-  .filter-group select:focus, .filter-group input:focus { outline: none; border-color: var(--accent); }
 
   .run-btn {
     background: var(--accent); color: white; border: none;
     padding: 0.875rem 2rem; border-radius: 8px; font-size: 0.95rem;
-    font-weight: 600; cursor: pointer; width: 100%;
-    transition: background 0.2s, transform 0.1s;
-    font-family: 'Inter', sans-serif;
-    margin-top: 0.5rem;
+    font-weight: 600; cursor: pointer; width: 100%; margin-top: 0.5rem;
+    font-family: 'Heebo', sans-serif; transition: background 0.2s;
   }
   .run-btn:hover { background: #145a3c; }
-  .run-btn:active { transform: scale(0.99); }
   .run-btn:disabled { background: #aaa; cursor: not-allowed; }
 
-  /* Stats bar */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .stat-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 10px; padding: 1rem 1.25rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
-  .stat-card .val { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--accent); }
-  .stat-card .lbl { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.2rem; }
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+  .stat-card .val { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+  .stat-card .lbl { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
 
-  /* Analysis result */
   .analysis-box {
-    background: var(--accent-light); border-left: 4px solid var(--accent);
-    border-radius: 0 10px 10px 0; padding: 1.5rem;
-    margin-bottom: 1.5rem; display: none;
+    background: var(--accent-light); border-right: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 1.5rem; margin-bottom: 1.5rem; display: none;
   }
-  .analysis-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--accent); }
-  .analysis-box p { font-size: 0.9rem; line-height: 1.7; color: #1a1a1a; margin-bottom: 0.6rem; }
+  .analysis-box h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--accent); }
+  .analysis-box p { font-size: 0.9rem; line-height: 1.8; color: #1a1a1a; margin-bottom: 0.6rem; }
 
-  /* Two columns */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+  .panel h3 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .panel h3 .tag { font-size: 0.65rem; background: var(--accent-light); color: var(--accent); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 500; }
 
-  .panel {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.25rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  }
-  .panel h3 { font-family: 'DM Serif Display', serif; font-size: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-  .panel h3 .tag { font-family: var(--mono); font-size: 0.65rem; background: var(--accent-light); color: var(--accent); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 500; }
-
-  /* Cluster pills */
-  .cluster-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.6rem 0; border-bottom: 1px solid var(--border);
-    font-size: 0.85rem;
-  }
+  .cluster-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
   .cluster-item:last-child { border-bottom: none; }
-  .cluster-name { font-weight: 500; }
   .cluster-price { font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
   .cluster-count { font-size: 0.75rem; color: var(--muted); }
 
-  /* Anomaly items */
-  .anomaly-item {
-    background: var(--warn-light); border: 1px solid #f5c6b0;
-    border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem; font-size: 0.82rem;
-  }
+  .anomaly-item { background: var(--warn-light); border: 1px solid #f5c6b0; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem; font-size: 0.82rem; }
   .anomaly-item .city { font-weight: 600; color: var(--warn); }
   .anomaly-item .price { font-family: var(--mono); font-size: 0.9rem; }
-  .anomaly-item .desc { color: var(--muted); margin-top: 0.25rem; font-size: 0.78rem; }
-  .deviation-badge {
-    display: inline-block; background: var(--warn); color: white;
-    font-family: var(--mono); font-size: 0.7rem; padding: 0.1rem 0.4rem;
-    border-radius: 4px; margin-left: 0.4rem;
-  }
+  .deviation-badge { display: inline-block; background: var(--warn); color: white; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 4px; margin-right: 0.4rem; }
 
-  /* Properties table */
   .props-panel { grid-column: span 2; }
   table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-  th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--border); }
+  th { text-align: right; font-size: 0.7rem; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--border); }
   td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--border); }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: var(--paper); }
-  .badge { display: inline-block; font-size: 0.68rem; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: var(--mono); }
+  .badge { display: inline-block; font-size: 0.68rem; padding: 0.15rem 0.45rem; border-radius: 4px; }
   .badge-cluster { background: var(--accent-light); color: var(--accent); }
   .badge-anomaly { background: var(--warn-light); color: var(--warn); }
 
-  /* Chart bars */
   .chart-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; font-size: 0.8rem; }
-  .chart-label { width: 90px; text-align: right; color: var(--muted); font-size: 0.75rem; }
-  .chart-bar-bg { flex: 1; background: var(--paper); border-radius: 4px; height: 20px; overflow: hidden; }
-  .chart-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.8s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; }
-  .chart-bar-fill span { font-size: 0.68rem; color: white; font-family: var(--mono); }
+  .chart-label { width: 90px; text-align: left; color: var(--muted); font-size: 0.75rem; }
+  .chart-bar-bg { flex: 1; background: var(--paper); border-radius: 4px; height: 22px; overflow: hidden; }
+  .chart-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.8s ease; display: flex; align-items: center; justify-content: flex-end; padding-left: 6px; }
+  .chart-bar-fill span { font-size: 0.68rem; color: white; }
 
-  /* Loading */
   .loader { display: none; text-align: center; padding: 2rem; color: var(--muted); font-size: 0.875rem; }
   .spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 0.75rem; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -174,98 +118,92 @@
 <body>
 
 <header>
-  <h1>House<em>IQ</em></h1>
-  <span>AI-Powered Real Estate Agent</span>
+  <h1>נדל"ן <em>IQ</em></h1>
+  <span>סוכן AI לניתוח שוק הנדל"ן הישראלי | מבוסס נתוני יד2</span>
 </header>
 
 <div class="container">
 
-  <!-- Stats bar -->
-  <div class="stats-bar" id="statsBar">
-    <div class="stat-card"><div class="val" id="s-total">–</div><div class="lbl">Total Listings</div></div>
-    <div class="stat-card"><div class="val" id="s-cities">–</div><div class="lbl">Cities Covered</div></div>
-    <div class="stat-card"><div class="val" id="s-clusters">5</div><div class="lbl">Market Segments</div></div>
-    <div class="stat-card"><div class="val" id="s-anomalies">–</div><div class="lbl">Anomalies Detected</div></div>
+  <div class="stats-bar">
+    <div class="stat-card"><div class="val" id="s-total">–</div><div class="lbl">סה"כ נכסים</div></div>
+    <div class="stat-card"><div class="val" id="s-cities">–</div><div class="lbl">ערים</div></div>
+    <div class="stat-card"><div class="val">5</div><div class="lbl">סגמנטים בשוק</div></div>
+    <div class="stat-card"><div class="val" id="s-anomalies">–</div><div class="lbl">חריגות מחיר</div></div>
   </div>
 
-  <!-- Query -->
   <div class="query-card">
-    <h2>Ask the Agent</h2>
-    <textarea id="queryInput" placeholder="e.g. Where should I buy a 2-bedroom home under $900K? Are there any underpriced deals in San Francisco?">Where's the best city to buy a 2-bedroom home under $900K?</textarea>
+    <h2>שאל את הסוכן</h2>
+    <textarea id="queryInput" placeholder="לדוגמה: מהי העיר הטובה ביותר לרכישת דירת 4 חדרים עד 3 מיליון? יש עסקאות חריגות בתל אביב?">מהי העיר הטובה ביותר לרכישת דירת 3 חדרים עד 3 מיליון ₪?</textarea>
     <div class="filters">
       <div class="filter-group">
-        <label>City</label>
-        <select id="fCity"><option value="">All Cities</option></select>
+        <label>עיר</label>
+        <select id="fCity"><option value="">כל הערים</option></select>
       </div>
       <div class="filter-group">
-        <label>Max Price ($)</label>
-        <input type="number" id="fPrice" placeholder="e.g. 900000" step="50000"/>
+        <label>מחיר מקסימלי (₪)</label>
+        <input type="number" id="fPrice" placeholder="לדוגמה: 3000000" step="100000"/>
       </div>
       <div class="filter-group">
-        <label>Min Bedrooms</label>
-        <select id="fBeds">
-          <option value="">Any</option>
-          <option value="1">1+</option>
+        <label>מינ' חדרים</label>
+        <select id="fRooms">
+          <option value="">הכל</option>
           <option value="2">2+</option>
           <option value="3">3+</option>
           <option value="4">4+</option>
+          <option value="5">5+</option>
         </select>
       </div>
       <div class="filter-group">
-        <label>Property Type</label>
+        <label>סוג נכס</label>
         <select id="fType">
-          <option value="">All Types</option>
-          <option>Apartment</option>
-          <option>House</option>
-          <option>Condo</option>
-          <option>Townhouse</option>
-          <option>Studio</option>
+          <option value="">כל הסוגים</option>
+          <option value="דירה">דירה</option>
+          <option value="בית פרטי">בית פרטי</option>
+          <option value="דירת גן">דירת גן</option>
+          <option value="פנטהאוז">פנטהאוז</option>
+          <option value="דופלקס">דופלקס</option>
         </select>
       </div>
     </div>
-    <button class="run-btn" id="runBtn" onclick="runAnalysis()">Run Agent Analysis</button>
+    <button class="run-btn" id="runBtn" onclick="runAnalysis()">הפעל ניתוח סוכן AI</button>
   </div>
 
-  <!-- Loader -->
   <div class="loader" id="loader">
     <div class="spinner"></div>
-    Agent is analyzing the market…
+    הסוכן מנתח את השוק...
   </div>
 
-  <!-- Analysis result -->
   <div class="analysis-box" id="analysisBox">
-    <h3>🤖 Agent Analysis</h3>
+    <h3>🤖 ניתוח הסוכן</h3>
     <div id="analysisText"></div>
   </div>
 
-  <!-- Charts + Anomalies -->
   <div class="cols">
     <div class="panel">
-      <h3>Market Segments <span class="tag">K-Means</span></h3>
+      <h3>סגמנטים בשוק <span class="tag">K-Means</span></h3>
       <div id="clusterList"></div>
     </div>
     <div class="panel">
-      <h3>Price Distribution <span class="tag">Histogram</span></h3>
+      <h3>התפלגות מחירים <span class="tag">היסטוגרמה</span></h3>
       <div id="priceChart"></div>
     </div>
     <div class="panel">
-      <h3>Anomalies <span class="tag">Isolation Forest</span></h3>
+      <h3>חריגות מחיר <span class="tag">Isolation Forest</span></h3>
       <div id="anomalyList"></div>
     </div>
     <div class="panel">
-      <h3>City Rankings <span class="tag">Avg Price</span></h3>
+      <h3>דירוג ערים <span class="tag">לפי מחיר ממוצע</span></h3>
       <div id="cityRank"></div>
     </div>
   </div>
 
-  <!-- Properties -->
   <div class="panel props-panel">
-    <h3>Matching Properties <span class="tag" id="propCount">–</span></h3>
+    <h3>נכסים תואמים <span class="tag" id="propCount">–</span></h3>
     <div style="overflow-x:auto">
       <table id="propsTable">
         <thead><tr>
-          <th>City</th><th>Neighborhood</th><th>Type</th>
-          <th>Price</th><th>Beds</th><th>Sqft</th><th>Segment</th><th>Note</th>
+          <th>עיר</th><th>שכונה</th><th>סוג</th>
+          <th>מחיר</th><th>חדרים</th><th>מ"ר</th><th>₪/מ"ר</th><th>סגמנט</th><th>הערה</th>
         </tr></thead>
         <tbody id="propsBody"></tbody>
       </table>
@@ -275,14 +213,14 @@
 </div>
 
 <script>
-const fmt = n => '$' + Number(n).toLocaleString();
+const fmt = n => '₪' + Number(n).toLocaleString('he-IL');
 
 async function loadStats() {
   const r = await fetch('/api/stats');
   const d = await r.json();
-  document.getElementById('s-total').textContent = d.total_listings.toLocaleString();
+  document.getElementById('s-total').textContent = d.total_listings.toLocaleString('he-IL');
   document.getElementById('s-cities').textContent = d.city_stats.length;
-  document.getElementById('s-anomalies').textContent = d.anomaly_count;
+  document.getElementById('s-anomalies').textContent = d.anomaly_count.toLocaleString('he-IL');
   renderClusters(d.clusters);
   renderCityRank(d.city_stats);
 }
@@ -300,8 +238,7 @@ async function loadCities() {
 
 async function runAnalysis() {
   const btn = document.getElementById('runBtn');
-  btn.disabled = true;
-  btn.textContent = 'Analyzing…';
+  btn.disabled = true; btn.textContent = 'מנתח...';
   document.getElementById('loader').style.display = 'block';
   document.getElementById('analysisBox').style.display = 'none';
 
@@ -309,62 +246,46 @@ async function runAnalysis() {
     query: document.getElementById('queryInput').value,
     city: document.getElementById('fCity').value || null,
     max_price: document.getElementById('fPrice').value || null,
-    min_bedrooms: document.getElementById('fBeds').value || null,
+    min_rooms: document.getElementById('fRooms').value || null,
     property_type: document.getElementById('fType').value || null,
   };
 
   try {
     const r = await fetch('/api/analyze', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload)
     });
     const d = await r.json();
 
-    // Analysis
     const box = document.getElementById('analysisBox');
-    const txt = document.getElementById('analysisText');
-    txt.innerHTML = d.analysis.split('\n').filter(l => l.trim()).map(l => `<p>${l}</p>`).join('');
+    document.getElementById('analysisText').innerHTML =
+      d.analysis.split('\n').filter(l => l.trim()).map(l => `<p>${l}</p>`).join('');
     box.style.display = 'block';
 
-    // Properties
     renderProperties(d.properties);
-
-    // Clusters
     renderClusters(d.clusters);
-
-    // Anomalies
     renderAnomalies(d.anomalies);
-
-    // Price chart
     renderPriceChart(d.price_distribution);
-
-    // City rank
     renderCityRank(d.city_stats);
-
   } catch(e) {
-    document.getElementById('analysisText').innerHTML = '<p style="color:red">Error: ' + e.message + '</p>';
+    document.getElementById('analysisText').innerHTML = '<p style="color:red">שגיאה: ' + e.message + '</p>';
     document.getElementById('analysisBox').style.display = 'block';
   }
 
   document.getElementById('loader').style.display = 'none';
-  btn.disabled = false;
-  btn.textContent = 'Run Agent Analysis';
+  btn.disabled = false; btn.textContent = 'הפעל ניתוח סוכן AI';
 }
 
 function renderProperties(props) {
-  document.getElementById('propCount').textContent = props.length + ' results';
-  const tbody = document.getElementById('propsBody');
-  tbody.innerHTML = props.map(p => `
+  document.getElementById('propCount').textContent = props.length + ' תוצאות';
+  document.getElementById('propsBody').innerHTML = props.map(p => `
     <tr>
-      <td>${p.city}</td>
-      <td>${p.neighborhood}</td>
-      <td>${p.property_type}</td>
+      <td>${p.city}</td><td>${p.neighborhood||'–'}</td><td>${p.property_type}</td>
       <td><strong>${fmt(p.price)}</strong></td>
-      <td>${p.bedrooms}</td>
-      <td>${Number(p.sqft).toLocaleString()}</td>
+      <td>${p.rooms}</td><td>${Number(p.area_sqm).toLocaleString()}</td>
+      <td>${Number(p.price_per_sqrm||0).toLocaleString()}</td>
       <td><span class="badge badge-cluster">${p.cluster_label}</span></td>
-      <td>${p.is_anomaly ? '<span class="badge badge-anomaly">⚠ Unusual</span>' : ''}</td>
+      <td>${p.is_anomaly ? '<span class="badge badge-anomaly">⚠ חריג</span>' : ''}</td>
     </tr>`).join('');
 }
 
@@ -372,8 +293,8 @@ function renderClusters(clusters) {
   document.getElementById('clusterList').innerHTML = clusters.map(c => `
     <div class="cluster-item">
       <div>
-        <div class="cluster-name">${c.cluster_label}</div>
-        <div class="cluster-count">${Number(c.count).toLocaleString()} listings · ${Math.round(c.avg_bedrooms * 10) / 10} beds avg</div>
+        <div style="font-weight:500">${c.cluster_label}</div>
+        <div class="cluster-count">${Number(c.count).toLocaleString()} נכסים · ${c.avg_rooms} חד' · ${Number(c.avg_sqm).toLocaleString()} מ"ר</div>
       </div>
       <div class="cluster-price">${fmt(c.avg_price)}</div>
     </div>`).join('');
@@ -382,16 +303,16 @@ function renderClusters(clusters) {
 function renderAnomalies(anomalies) {
   document.getElementById('anomalyList').innerHTML = anomalies.map(a => `
     <div class="anomaly-item">
-      <div><span class="city">${a.city}, ${a.neighborhood}</span>
+      <div><span class="city">${a.city}${a.neighborhood ? ', ' + a.neighborhood : ''}</span>
         <span class="deviation-badge">${a.price_deviation > 0 ? '+' : ''}${a.price_deviation}σ</span>
       </div>
-      <div class="price">${fmt(a.price)} · ${a.bedrooms} bed · ${Number(a.sqft).toLocaleString()} sqft</div>
-      <div class="desc">${a.description}</div>
+      <div class="price">${fmt(a.price)} · ${a.rooms} חד' · ${Number(a.area_sqm).toLocaleString()} מ"ר</div>
+      <div style="color:var(--muted);font-size:0.78rem;margin-top:0.2rem">${a.property_type}</div>
     </div>`).join('');
 }
 
 function renderPriceChart(dist) {
-  if (!dist || !dist.labels) return;
+  if (!dist?.labels) return;
   const max = Math.max(...dist.values);
   document.getElementById('priceChart').innerHTML = dist.labels.map((l, i) => `
     <div class="chart-row">
@@ -408,7 +329,7 @@ function renderCityRank(stats) {
   const max = Math.max(...stats.map(s => s.avg_price));
   document.getElementById('cityRank').innerHTML = stats.slice(0, 8).map(s => `
     <div class="chart-row">
-      <div class="chart-label" style="font-size:0.7rem">${s.city.replace(' ', ' ')}</div>
+      <div class="chart-label">${s.city}</div>
       <div class="chart-bar-bg">
         <div class="chart-bar-fill" style="width:${Math.round(s.avg_price/max*100)}%">
           <span>${fmt(s.avg_price)}</span>

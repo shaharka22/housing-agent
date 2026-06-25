@@ -8,19 +8,14 @@ from ml_models import (
     search_properties,
     get_city_stats,
     get_price_distribution,
-    find_similar,
 )
 
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, (np.integer,)):
-            return int(obj)
-        if isinstance(obj, (np.floating,)):
-            return float(obj)
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        if isinstance(obj, (np.bool_,)):
-            return bool(obj)
+        if isinstance(obj, (np.integer,)): return int(obj)
+        if isinstance(obj, (np.floating,)): return float(obj)
+        if isinstance(obj, np.ndarray): return obj.tolist()
+        if isinstance(obj, (np.bool_,)): return bool(obj)
         return super().default(obj)
 
 def safe_json(obj, **kwargs):
@@ -31,62 +26,51 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
 
 def run_agent(user_query: str, filters: dict = None) -> dict:
-    """
-    Main agent function:
-    1. Gather relevant data from ML models
-    2. Send to Claude with context
-    3. Return structured response
-    """
     filters = filters or {}
 
-    # Gather data based on query context
     city = filters.get("city")
     max_price = filters.get("max_price")
-    min_bedrooms = filters.get("min_bedrooms")
+    min_rooms = filters.get("min_rooms")
     property_type = filters.get("property_type")
 
     properties = search_properties(
-        city=city,
-        max_price=max_price,
-        min_bedrooms=min_bedrooms,
-        property_type=property_type,
-        limit=15,
+        city=city, max_price=max_price, min_rooms=min_rooms,
+        property_type=property_type, limit=15,
     )
     clusters = get_cluster_summary()
     anomalies = get_anomalies(limit=5)
     city_stats = get_city_stats()
     price_dist = get_price_distribution(city=city)
 
-    # Build context for the agent
     context = f"""
-You are a real estate AI analyst. Analyze the housing data below and answer the user's query with specific, data-driven insights.
+אתה סוכן AI מומחה לנדל"ן ישראלי. נתח את נתוני יד2 הבאים וענה לשאלת המשתמש בעברית.
 
-USER QUERY: {user_query}
+שאלת המשתמש: {user_query}
 
-ACTIVE FILTERS: {safe_json(filters, ensure_ascii=False)}
+פילטרים פעילים: {safe_json(filters, ensure_ascii=False)}
 
-MATCHING PROPERTIES (sample of {len(properties)}):
+נכסים תואמים (דגימה של {len(properties)}):
 {safe_json(properties[:8], indent=2, ensure_ascii=False)}
 
-MARKET CLUSTERS (K-Means segmentation):
+סגמנטים בשוק (K-Means clustering):
 {safe_json(clusters, indent=2, ensure_ascii=False)}
 
-PRICE ANOMALIES (unusual deals detected by Isolation Forest):
+חריגות מחיר (Isolation Forest):
 {safe_json(anomalies[:3], indent=2, ensure_ascii=False)}
 
-CITY-LEVEL STATS:
-{safe_json(city_stats[:5], indent=2, ensure_ascii=False)}
+סטטיסטיקות לפי עיר:
+{safe_json(city_stats[:6], indent=2, ensure_ascii=False)}
 
-PRICE DISTRIBUTION{' in ' + city if city else ''}:
+התפלגות מחירים{' ב' + city if city else ''}:
 {safe_json(price_dist, indent=2, ensure_ascii=False)}
 
-Instructions:
-- Give a clear, direct recommendation based on the data
-- Reference specific numbers from the data
-- Highlight any anomalies (unusually cheap/expensive) if relevant
-- Mention which market segment fits the user's needs
-- Keep the response to 3-4 paragraphs, professional but approachable
-- End with a concrete "Bottom Line" recommendation
+הוראות:
+- ענה בעברית בצורה ברורה וישירה
+- התבסס על המספרים מהדאטה
+- ציין האם יש עסקאות חריגות (זולות או יקרות מהממוצע)
+- ציין לאיזה סגמנט שוק מתאים הצורך של המשתמש
+- סיים עם המלצה ברורה "שורה תחתונה"
+- כתוב 3-4 פסקאות קצרות
 """
 
     headers = {
@@ -94,7 +78,6 @@ Instructions:
         "anthropic-version": "2023-06-01",
         "content-type": "application/json",
     }
-
     payload = {
         "model": "claude-sonnet-4-6",
         "max_tokens": 1000,
@@ -104,10 +87,9 @@ Instructions:
     try:
         response = requests.post(ANTHROPIC_API_URL, headers=headers, json=payload, timeout=30)
         response.raise_for_status()
-        data = response.json()
-        analysis = data["content"][0]["text"]
+        analysis = response.json()["content"][0]["text"]
     except Exception as e:
-        analysis = f"Agent analysis unavailable: {str(e)}. Please check your API key."
+        analysis = f"ניתוח הסוכן אינו זמין: {str(e)}"
 
     return {
         "analysis": analysis,

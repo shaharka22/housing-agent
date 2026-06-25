@@ -45,7 +45,7 @@ def analyze():
         for k, v in {
             "city": data.get("city"),
             "max_price": data.get("max_price"),
-            "min_bedrooms": data.get("min_bedrooms"),
+            "min_rooms": data.get("min_rooms"),
             "property_type": data.get("property_type"),
         }.items()
         if v
