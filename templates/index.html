@@ -214,9 +214,24 @@ async function sendMessage() {
   document.getElementById('sendBtn').disabled = false;
 }
 
+function mdToHtml(text) {
+  return text
+    .replace(/### (.+)/g, '<h4 style="font-size:0.9rem;font-weight:700;margin:0.6rem 0 0.3rem;color:var(--accent)">$1</h4>')
+    .replace(/## (.+)/g, '<h3 style="font-size:1rem;font-weight:700;margin:0.6rem 0 0.3rem;color:var(--accent)">$1</h3>')
+    .replace(/# (.+)/g, '<h2 style="font-size:1.1rem;font-weight:700;margin:0.6rem 0 0.3rem">$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)/gm, '<li style="margin-right:1rem;margin-bottom:0.2rem">$1</li>')
+    .replace(/(<li.*<\/li>)/gs, '<ul style="margin:0.4rem 0;padding-right:0.5rem">$1</ul>')
+    .split('\n')
+    .filter(l => l.trim() && !l.startsWith('<h') && !l.startsWith('<ul') && !l.startsWith('<li'))
+    .map(l => l.startsWith('<') ? l : `<p style="margin-bottom:0.4rem">${l}</p>`)
+    .join('');
+}
+
 function renderBotResponse(d) {
   // Analysis text
-  const paras = d.analysis.split('\n').filter(l => l.trim()).map(l => `<p style="margin-bottom:0.4rem">${l}</p>`).join('');
+  const paras = mdToHtml(d.analysis);
   addMsg(paras);
 
   // Properties (top 4)
