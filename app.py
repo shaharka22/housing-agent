@@ -28,7 +28,7 @@ print("Loading housing data and training models...")
 ml_models.load_and_prepare()
 print("Models ready.")
 
-HTML = open(os.path.join(os.path.dirname(__file__), "templates", "index.html"), encoding="utf-8").read()
+HTML = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates", "index.html"), encoding="utf-8").read()
 
 
 @app.route("/")
